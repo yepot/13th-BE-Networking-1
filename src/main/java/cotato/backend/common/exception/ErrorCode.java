@@ -15,6 +15,7 @@ public enum ErrorCode {
 	NOT_FOUND(HttpStatus.NOT_FOUND, "찾을 수 없습니다.", "COMMON-003"),
 	DUPLICATE_APPLICATION(HttpStatus.CONFLICT, "이미 해당 기수에 제출한 지원서가 있습니다.", "APPLICATION-001"),
 	APPLICATION_NOT_FOUND(HttpStatus.NOT_FOUND, "지원서류를 찾을 수 없습니다.", "APPLICATION-002"),
+	DUPLICATE_APPLICATION_LIKE(HttpStatus.CONFLICT, "이미 해당 운영진이 좋아요를 눌렀습니다.", "APPLICATION-003"),
 	APPLICANT_NOT_FOUND(HttpStatus.NOT_FOUND, "지원자를 찾을 수 없습니다.", "APPLICANT-001"),
 	DUPLICATE_APPLICANT_PHONE_NUMBER(HttpStatus.CONFLICT, "이미 등록된 연락처입니다.", "APPLICANT-002"),
 	EXECUTIVE_NOT_FOUND(HttpStatus.NOT_FOUND, "운영진을 찾을 수 없습니다.", "EXECUTIVE-001"),

@@ -113,4 +113,14 @@ public class Application {
 			.likeCount(0)
 			.build();
 	}
+
+	public void increaseLikeCount() {
+		this.likeCount++;
+	}
+
+	public void decreaseLikeCount() {
+		if (this.likeCount > 0) {
+			this.likeCount--;
+		}
+	}
 }

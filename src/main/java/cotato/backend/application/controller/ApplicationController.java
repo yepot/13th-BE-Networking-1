@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import cotato.backend.application.dto.request.ApplicationCreateRequest;
+import cotato.backend.application.dto.request.ApplicationLikeRequest;
 import cotato.backend.application.dto.request.ApplicationListRequest;
 import cotato.backend.application.dto.response.ApplicationCreateResponse;
 import cotato.backend.application.dto.response.ApplicationDetailResponse;
+import cotato.backend.application.dto.response.ApplicationLikeResponse;
 import cotato.backend.application.dto.response.ApplicationListResponse;
 import cotato.backend.application.service.ApplicationService;
 import cotato.backend.common.dto.DataResponse;
@@ -41,6 +43,12 @@ public class ApplicationController {
 	public ResponseEntity<DataResponse<ApplicationDetailResponse>> findById(@Parameter(description = "지원서 ID", example = "1")
                                                                                 @PathVariable Long id) {
 		return ResponseEntity.ok(DataResponse.from(applicationService.findById(id)));
+	}
+
+	@PostMapping("/{id}/likes")
+	public ResponseEntity<DataResponse<ApplicationLikeResponse>> like(@PathVariable Long id,
+                                                                      @Valid @RequestBody ApplicationLikeRequest request) {
+		return ResponseEntity.ok(DataResponse.from(applicationService.like(id, request)));
 	}
 
 	@GetMapping

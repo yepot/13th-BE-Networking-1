@@ -1,0 +1,10 @@
+package cotato.backend.application.dto.request;
+
+import jakarta.validation.constraints.NotNull;
+
+public record ApplicationLikeRequest(
+
+	@NotNull(message = "운영진 ID는 필수입니다.")
+	Long executiveId
+) {
+}

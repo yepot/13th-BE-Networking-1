@@ -19,6 +19,10 @@ public class ExecutiveService {
 
 	private final ExecutiveRepository executiveRepository;
 
+	public Executive findExecutiveEntity(Long id) {
+		return getExecutive(id);
+	}
+
 	public ExecutiveResponse findById(Long id) {
 		return ExecutiveResponse.from(getExecutive(id));
 	}

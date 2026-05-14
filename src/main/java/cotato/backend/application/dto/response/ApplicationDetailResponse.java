@@ -1,6 +1,7 @@
 package cotato.backend.application.dto.response;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -19,10 +20,14 @@ public record ApplicationDetailResponse(
 	String phoneNumber,
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm")
 	LocalDateTime applicationTime,
-	Integer likeCount
+	Integer likeCount,
+	List<ApplicationLikedExecutiveResponse> likedExecutives
 ) {
 
-	public static ApplicationDetailResponse from(Application application) {
+	public static ApplicationDetailResponse from(
+		Application application,
+		List<ApplicationLikedExecutiveResponse> likedExecutives
+	) {
 		return new ApplicationDetailResponse(
 			application.getId(),
 			application.getApplicant().getId(),
@@ -34,7 +39,8 @@ public record ApplicationDetailResponse(
 			application.getPassion(),
 			application.getPhoneNumber(),
 			application.getApplicationTime(),
-			application.getLikeCount()
+			application.getLikeCount(),
+			likedExecutives
 		);
 	}
 }
