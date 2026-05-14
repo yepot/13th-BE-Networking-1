@@ -23,9 +23,13 @@ public class ErrorResponse extends BaseResponse {
 	}
 
 	public static ErrorResponse of(ErrorCode errorCode, HttpServletRequest request) {
+		return of(errorCode, errorCode.getMessage(), request);
+	}
+
+	public static ErrorResponse of(ErrorCode errorCode, String message, HttpServletRequest request) {
 		return new ErrorResponse(
 			errorCode.getCode(),
-			errorCode.getMessage(),
+			message,
 			request.getMethod(),
 			request.getRequestURI(),
 			errorCode.getHttpStatus()

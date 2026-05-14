@@ -3,10 +3,7 @@ package cotato.backend.common.dto;
 import org.springframework.http.HttpStatus;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-
-import lombok.Getter;
-
-@Getter
+import com.fasterxml.jackson.annotation.JsonValue;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class DataResponse<T> extends BaseResponse {
 
@@ -27,6 +24,11 @@ public class DataResponse<T> extends BaseResponse {
 
 	public static <T> DataResponse<T> created(T data) {
 		return new DataResponse<>(HttpStatus.CREATED, data);
+	}
+
+	@JsonValue
+	public T getData() {
+		return data;
 	}
 
 	// 다른 응답 필요하면 추가
