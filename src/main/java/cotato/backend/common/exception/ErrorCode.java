@@ -17,6 +17,7 @@ public enum ErrorCode {
 	APPLICATION_NOT_FOUND(HttpStatus.NOT_FOUND, "지원서류를 찾을 수 없습니다.", "APPLICATION-002"),
 	APPLICANT_NOT_FOUND(HttpStatus.NOT_FOUND, "지원자를 찾을 수 없습니다.", "APPLICANT-001"),
 	DUPLICATE_APPLICANT_PHONE_NUMBER(HttpStatus.CONFLICT, "이미 등록된 연락처입니다.", "APPLICANT-002"),
+	EXECUTIVE_NOT_FOUND(HttpStatus.NOT_FOUND, "운영진을 찾을 수 없습니다.", "EXECUTIVE-001"),
 
 	//500
 	INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "서버 내부에서 에러가 발생하였습니다.", "COMMON-004"),
