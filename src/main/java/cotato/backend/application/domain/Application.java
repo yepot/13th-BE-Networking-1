@@ -2,6 +2,7 @@ package cotato.backend.application.domain;
 
 import java.time.LocalDateTime;
 
+import cotato.backend.applicant.domain.Applicant;
 import cotato.backend.application.dto.request.ApplicationCreateRequest;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -11,6 +12,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Index;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 import lombok.AccessLevel;
@@ -37,6 +41,10 @@ public class Application {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "application_id")
 	private Long id;
+
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "applicant_id", nullable = false)
+	private Applicant applicant;
 
 	@Column(name = "name", nullable = false, length = 10)
 	private String name;
@@ -68,6 +76,7 @@ public class Application {
 
 	@Builder
 	private Application(
+		Applicant applicant,
 		String name,
 		Integer period,
 		Integer age,
@@ -78,6 +87,7 @@ public class Application {
 		LocalDateTime applicationTime,
 		Integer likeCount
 	) {
+		this.applicant = applicant;
 		this.name = name;
 		this.period = period;
 		this.age = age;
@@ -89,8 +99,9 @@ public class Application {
 		this.likeCount = likeCount;
 	}
 
-	public static Application from(ApplicationCreateRequest request) {
+	public static Application from(ApplicationCreateRequest request, Applicant applicant) {
 		return Application.builder()
+			.applicant(applicant)
 			.name(request.name())
 			.period(request.period())
 			.age(request.age())

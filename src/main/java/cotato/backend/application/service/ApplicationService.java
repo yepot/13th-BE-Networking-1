@@ -5,6 +5,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import cotato.backend.applicant.domain.Applicant;
+import cotato.backend.applicant.service.ApplicantService;
 import cotato.backend.application.domain.Application;
 import cotato.backend.application.domain.ApplicationListFilter;
 import cotato.backend.application.dto.request.ApplicationCreateRequest;
@@ -25,12 +27,14 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor(access = AccessLevel.PROTECTED)
 public class ApplicationService {
 
+	private final ApplicantService applicantService;
 	private final ApplicationRepository applicationRepository;
 
 	@Transactional
 	public ApplicationCreateResponse create(ApplicationCreateRequest request) {
 		validateDuplicateApplication(request.phoneNumber(), request.period());
-		Application application = applicationRepository.save(Application.from(request));
+		Applicant applicant = applicantService.findOrCreate(request.name(), request.age(), request.phoneNumber());
+		Application application = applicationRepository.save(Application.from(request, applicant));
 		return ApplicationCreateResponse.from(application);
 	}
 

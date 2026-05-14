@@ -9,6 +9,7 @@ import cotato.backend.application.domain.ApplicationPart;
 
 public record ApplicationDetailResponse(
 	Long id,
+	Long applicantId,
 	String name,
 	Integer period,
 	Integer age,
@@ -24,6 +25,7 @@ public record ApplicationDetailResponse(
 	public static ApplicationDetailResponse from(Application application) {
 		return new ApplicationDetailResponse(
 			application.getId(),
+			application.getApplicant().getId(),
 			application.getName(),
 			application.getPeriod(),
 			application.getAge(),
